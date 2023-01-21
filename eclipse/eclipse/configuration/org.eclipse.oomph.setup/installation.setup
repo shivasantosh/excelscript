@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Installation
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    name="installation">
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="JRE 17.0.5 - https://download.eclipse.org/justj/jres/17/updates/release/latest">
+    <annotation
+        source="http://www.eclipse.org/oomph/setup/JRE"/>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        excludedTriggers="STARTUP MANUAL"
+        label="JRE 17.0.5">
+      <requirement
+          name="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group"
+          filter="(|(&amp;(osgi.arch=aarch64)(osgi.os=linux))(&amp;(osgi.arch=aarch64)(osgi.os=macosx))(&amp;(osgi.arch=x86_64)(osgi.os=linux))(&amp;(osgi.arch=x86_64)(osgi.os=macosx))(&amp;(osgi.arch=x86_64)(osgi.os=win32)))"/>
+      <repository
+          url="https://download.eclipse.org/justj/jres/17/updates/release/latest"/>
+      <description>
+        Contains the plug-ins and fragments for the Adoptium OpenJDK Hotspot JRE Complete.
+        Provides the complete set of modules of the JDK, excluding incubators.
+      </description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        excludedTriggers="STARTUP MANUAL"
+        option="--add-opens=java.base/java.lang=ALL-UNNAMED"
+        vm="true"/>
+  </setupTask>
+  <productVersion
+      href="index:/org.eclipse.setup#//@productCatalogs[name='org.eclipse.products']/@products[name='epp.package.java']/@versions[name='2022-12']"/>
+</setup:Installation>
