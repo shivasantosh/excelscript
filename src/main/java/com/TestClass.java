@@ -58,7 +58,7 @@ public class TestClass {
 
 		Map<String, List<SCData>> singleGarauteeMap = new HashMap<>();
 		Map<String, List<SCData>> twoGarauteeMap = new HashMap<>();
-		Map<String, List<SCData>> ThreeGarauteeMap = new HashMap<>();
+		Map<String, List<SCData>> threeGarauteeMap = new HashMap<>();
 		Map<String, List<SCData>> fourGarauteeMap = new HashMap<>();
 		Map<String, List<SCData>> fiveGarauteeMap = new HashMap<>();
 
@@ -68,7 +68,7 @@ public class TestClass {
 			} else if (mapData.getValue().size() == 3) {
 				twoGarauteeMap.put(mapData.getKey(), mapData.getValue());
 			} else if (mapData.getValue().size() == 4) {
-				ThreeGarauteeMap.put(mapData.getKey(), mapData.getValue());
+				threeGarauteeMap.put(mapData.getKey(), mapData.getValue());
 			} else if (mapData.getValue().size() == 5) {
 				fourGarauteeMap.put(mapData.getKey(), mapData.getValue());
 			} else if (mapData.getValue().size() == 6) {
@@ -77,6 +77,8 @@ public class TestClass {
 		}
 
 		singleGarantee(singleGarauteeMap, cbmsMap);
+		twoGarantee(twoGarauteeMap, cbmsMap);
+		threeGarantee(threeGarauteeMap, cbmsMap);
 
 	}
 
@@ -88,7 +90,7 @@ public class TestClass {
 		for (Entry<String, List<SCData>> mapData : twoGarauteeMap.entrySet()) {
 			Row row = sheet.createRow(++rowCount);
 			int columnCount = 0;
-			for (int i = 0; i <= 8; i++) {
+			for (int i = 0; i <= 9; i++) {
 				SCData mainData = mapData.getValue().get(0);
 				SCData gauranteeData = mapData.getValue().get(1);
 				SCData gauranteeData2 = mapData.getValue().get(2);
@@ -100,7 +102,7 @@ public class TestClass {
 				} else if (i == 2) {
 					cell.setCellValue(gauranteeData.getBcbIdNo1());
 				} else if (i == 3) {
-					cell.setCellValue(gauranteeData.getBcbIdNo2());
+					cell.setCellValue(gauranteeData2.getBcbIdNo1());
 				} else if (i == 4) {
 					cell.setCellValue(mainData.getCothIsic());
 				} else if (i == 5) {
@@ -123,7 +125,60 @@ public class TestClass {
 
 			}
 		}
-		try (FileOutputStream outputStream = new FileOutputStream("D:/test/singleGaurantee.xlsx")) {
+		try (FileOutputStream outputStream = new FileOutputStream("D:/test/twoGarantee.xlsx")) {
+			workbook.write(outputStream);
+		} finally {
+			workbook.close();
+		}
+	}
+	
+	public static void threeGarantee(Map<String, List<SCData>> threeGarauteeMap, Map<String, CBMSData> cbmsMap)
+			throws Exception {
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet("threeGarantee");
+		int rowCount = 0;
+		for (Entry<String, List<SCData>> mapData : threeGarauteeMap.entrySet()) {
+			Row row = sheet.createRow(++rowCount);
+			int columnCount = 0;
+			for (int i = 0; i <= 10; i++) {
+				SCData mainData = mapData.getValue().get(0);
+				SCData gauranteeData = mapData.getValue().get(1);
+				SCData gauranteeData2 = mapData.getValue().get(2);
+				SCData gauranteeData3 = mapData.getValue().get(3);
+				Cell cell = row.createCell(++columnCount);
+				if (i == 0) {
+					cell.setCellValue(mainData.getBcbIdNo1());
+				} else if (i == 1) {
+					cell.setCellValue(mainData.getBcbIdNo2());
+				} else if (i == 2) {
+					cell.setCellValue(gauranteeData.getBcbIdNo1());
+				} else if (i == 3) {
+					cell.setCellValue(gauranteeData2.getBcbIdNo1());
+				} else if (i == 4) {
+					cell.setCellValue(gauranteeData3.getBcbIdNo1());
+				}else if (i == 5) {
+					cell.setCellValue(mainData.getCothIsic());
+				} else if (i == 6) {
+					cell.setCellValue(cbmsMap.get(mainData.getCothIsic()).getLable());
+				} else if (i == 7) {
+					cell.setCellValue(cbmsMap.get(mainData.getCothIsic()).getCbmsCode());
+				} else if (i == 8) {
+					cell.setCellValue(cbmsMap.get(mainData.getCothIsic()).getIncomeFactor());
+				} else if (i == 9) {
+					cell.setCellValue(cbmsMap.get(mainData.getCothIsic()).getIncomeFactorInPercentage());
+				} else if (i == 10) {
+					System.out.println(mainData.getVintageDat());
+					CellStyle cellStyle = workbook.createCellStyle();
+					CreationHelper createHelper = workbook.getCreationHelper();
+					cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-mm-dd"));
+					cell.setCellValue(mainData.getVintageDat());
+					cell.setCellStyle(cellStyle);
+					cell.setCellValue(mainData.getVintageDat());
+				}
+
+			}
+		}
+		try (FileOutputStream outputStream = new FileOutputStream("D:/test/threeGarantee.xlsx")) {
 			workbook.write(outputStream);
 		} finally {
 			workbook.close();
