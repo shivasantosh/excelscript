@@ -10,34 +10,36 @@ public class SCData {
 
     @ExcelCellInfo(index = 0)
     private String bcpApsNo;
-    @ExcelCellInfo(index = 1)
-    private String LendInAppId;
-    @ExcelCellInfo(index =2)
+    @ExcelCellInfo(index =1)
     private String akAppNum;
-    @ExcelCellInfo(index = 3)
+//    @ExcelCellInfo(index = 2)
+//    private String LendInAppId;
+    @ExcelCellInfo(index = 2)
     private String bcbIdNo1;
-    @ExcelCellInfo(index = 4)
+    @ExcelCellInfo(index = 3)
     private String bcbIdNo2;
-    @ExcelCellInfo(index = 5)
+    @ExcelCellInfo(index = 4)
     private String bcbIdType;
-    @ExcelCellInfo(index =6)
+    @ExcelCellInfo(index =5)
     private String cothIsic;
-    @ExcelCellInfo(index = 7)
+    @ExcelCellInfo(index = 6)
     private String consType;
-    @ExcelCellInfo(index = 8)
+    @ExcelCellInfo(index = 7)
     private Date vintageDat;
+    
+    
     public String getBcpApsNo() {
         return bcpApsNo;
     }
     public void setBcpApsNo(String bcpApsNo) {
         this.bcpApsNo = bcpApsNo;
     }
-    public String getLendInAppId() {
-        return LendInAppId;
-    }
-    public void setLendInAppId(String lendInAppId) {
-        LendInAppId = lendInAppId;
-    }
+//    public String getLendInAppId() {
+//        return LendInAppId;
+//    }
+//    public void setLendInAppId(String lendInAppId) {
+//        LendInAppId = lendInAppId;
+//    }
     public String getAkAppNum() {
         return akAppNum;
     }
@@ -82,7 +84,7 @@ public class SCData {
     }
     @Override
     public String toString() {
-	return "SCData [bcpApsNo=" + bcpApsNo + ", LendInAppId=" + LendInAppId + ", akAppNum=" + akAppNum
+	return "SCData [bcpApsNo=" + bcpApsNo + ", akAppNum=" + akAppNum
 		+ ", bcbIdNo1=" + bcbIdNo1 + ", bcbIdNo2=" + bcbIdNo2 + ", bcbIdType=" + bcbIdType + ", cothIsic="
 		+ cothIsic + ", consType=" + consType + ", vintageDat=" + vintageDat + "]";
     }

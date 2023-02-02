@@ -10,9 +10,10 @@ public class DefaultCellParser extends CellParser {
 	@Override
 	public void parse(Cell cell, Object object, Field field) {
 		Object cellValue;
-		if (field.getType().equals(String.class))
-			cellValue = cell.getStringCellValue();
-		else if (field.getType().equals(int.class) || field.getType().equals(Integer.class))
+		if (field.getType().equals(String.class)) {
+//			System.out.println(cell.getStringCellValue());
+			cellValue = String.valueOf(cell.getStringCellValue());
+		}else if (field.getType().equals(int.class) || field.getType().equals(Integer.class))
 			cellValue = Double.valueOf(cell.getNumericCellValue()).intValue();
 		else if (field.getType().equals(long.class) || field.getType().equals(Long.class))
 			cellValue = Double.valueOf(cell.getNumericCellValue()).longValue();
